@@ -23,7 +23,7 @@ export class PaymentsList implements OnInit {
     this.paymentService.getPayments().subscribe(data => this.payments = data);
   }
 
-  deletePayment(id: number) {
+  deletePayment(id: string) {
     this.paymentService.deletePayment(id).subscribe(() => this.loadPayments());
   }
 }

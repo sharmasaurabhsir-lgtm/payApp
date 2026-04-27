@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 export interface Payment {
-  id: number;
+  id: string;
   reference?: string;
   amount: number;
   currency: string;
@@ -22,15 +22,20 @@ export class PaymentService {
     return this.http.get<Payment[]>(this.apiUrl);
   }
 
+  getPaymentById(id: string): Observable<Payment> {
+    return this.http.get<Payment>(`${this.apiUrl}/${id}`);
+  }
+
   addPayment(payment: Payment): Observable<Payment> {
     return this.http.post<Payment>(this.apiUrl, payment);
   }
 
-  updatePayment(id: number, payment: Payment): Observable<Payment> {
+  updatePayment(id: string, payment: Payment): Observable<Payment> {
+    debugger;
     return this.http.put<Payment>(`${this.apiUrl}/${id}`, payment);
   }
 
-  deletePayment(id: number): Observable<void> {
+  deletePayment(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
   
